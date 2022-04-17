@@ -1,8 +1,15 @@
 import { Button, TextField, Container, Box, Alert } from "@mui/material";
+
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import logo from "../../assets/clinica-logo.png";
+import axios from "../../api/axios";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { useAuth } from "../../hooks/useAuth";
+
+const LOGIN_URL = "/auth/login";
 
 type FormData = {
   email: string;
@@ -10,17 +17,50 @@ type FormData = {
 };
 
 const LoginPage = () => {
+  // const { authState } = useContext(AuthContext);
+  // const { email, accessToken } = authState;
+  // const { login } = useContext(AuthContext);
+
+  const { email, accessToken, login } = useAuth();
+
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormData>();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     console.log(data);
+    const { email: userEmail, password } = data;
     //llamar a la api
-    navigate("/dashboard");
+    try {
+      const response = await axios.post(LOGIN_URL, {
+        userEmail,
+        password,
+      });
+
+      console.log("response", response);
+
+      if (response) {
+        //extraemos el token
+        const token = response?.data?.token;
+
+        //cambiamos el state
+        login(userEmail, token);
+
+        console.log(email, " ", accessToken);
+      }
+
+      navigate("/dashboard");
+
+      //console.log(JSON.stringify(response?.data));
+    } catch (error) {
+      console.log(error);
+    }
+
+    //navigate("/dashboard");
   };
 
   return (
