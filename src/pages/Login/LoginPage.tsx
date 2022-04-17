@@ -1,13 +1,19 @@
-import { Button, TextField, Container, Box, Alert } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Container,
+  Box,
+  Alert,
+  Snackbar,
+} from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import logo from "../../assets/clinica-logo.png";
 import axios from "../../api/axios";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
 import { useAuth } from "../../hooks/useAuth";
+import { useState } from "react";
 
 const LOGIN_URL = "/auth/login";
 
@@ -17,10 +23,6 @@ type FormData = {
 };
 
 const LoginPage = () => {
-  // const { authState } = useContext(AuthContext);
-  // const { email, accessToken } = authState;
-  // const { login } = useContext(AuthContext);
-
   const { email, accessToken, login } = useAuth();
 
   const navigate = useNavigate();
@@ -31,8 +33,28 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm<FormData>();
 
+  //-----------------------logica del snackbar de error---------------
+  const [open, setOpen] = useState(false);
+  // const [errMessage, setErrMessage] = useState("");
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  //---------------------------------------------------
+
   const onSubmit = async (data: any) => {
-    console.log(data);
     const { email: userEmail, password } = data;
     //llamar a la api
     try {
@@ -49,18 +71,13 @@ const LoginPage = () => {
 
         //cambiamos el state
         login(userEmail, token);
-
-        console.log(email, " ", accessToken);
       }
 
       navigate("/dashboard");
-
-      //console.log(JSON.stringify(response?.data));
     } catch (error) {
+      setOpen(true);
       console.log(error);
     }
-
-    //navigate("/dashboard");
   };
 
   return (
@@ -106,6 +123,17 @@ const LoginPage = () => {
             Ingresar
           </Button>
         </form>
+        {/* <Button variant="outlined">Open success snackbar</Button> */}
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity="error"
+            variant="filled"
+            sx={{ width: "100%" }}
+          >
+            Email o contraseña inválidos.
+          </Alert>
+        </Snackbar>
       </Container>
     </>
   );
