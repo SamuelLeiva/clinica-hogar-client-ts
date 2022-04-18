@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import logo from "../../assets/clinica-logo.png";
 import axios from "../../api/axios";
 import { useAuth } from "../../hooks/useAuth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const LOGIN_URL = "/auth/login";
 
@@ -27,6 +27,10 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (email !== "" && accessToken !== "") navigate("/dashboard");
+  });
+
   const {
     register,
     handleSubmit,
@@ -36,10 +40,6 @@ const LoginPage = () => {
   //-----------------------logica del snackbar de error---------------
   const [open, setOpen] = useState(false);
   const [errMessage, setErrMessage] = useState("");
-
-  const handleClick = () => {
-    setOpen(true);
-  };
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
