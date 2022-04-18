@@ -35,7 +35,7 @@ const LoginPage = () => {
 
   //-----------------------logica del snackbar de error---------------
   const [open, setOpen] = useState(false);
-  // const [errMessage, setErrMessage] = useState("");
+  const [errMessage, setErrMessage] = useState("");
 
   const handleClick = () => {
     setOpen(true);
@@ -75,8 +75,20 @@ const LoginPage = () => {
 
       navigate("/dashboard");
     } catch (error) {
+      if (!error?.response) {
+        setErrMessage("El servidor no responde.");
+      } else if (
+        error.response?.status === 400 ||
+        error.response?.status === 401
+      ) {
+        setErrMessage("Email o contraseña inválidos.");
+      } else if (error.response?.status === 500) {
+        setErrMessage("Fallo en el servidor.");
+      } else {
+        setErrMessage("Login fallido.");
+      }
       setOpen(true);
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -131,7 +143,7 @@ const LoginPage = () => {
             variant="filled"
             sx={{ width: "100%" }}
           >
-            Email o contraseña inválidos.
+            {errMessage}
           </Alert>
         </Snackbar>
       </Container>
