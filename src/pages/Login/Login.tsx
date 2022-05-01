@@ -14,8 +14,7 @@ import logo from "../../assets/clinica-logo.png";
 import axios from "../../api/axios";
 import { useAuth } from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
-
-const LOGIN_URL = "/auth/login";
+import { LOGIN_URL } from "../../constants/server_uris";
 
 type FormData = {
   email: string;
