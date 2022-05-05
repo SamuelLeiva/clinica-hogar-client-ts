@@ -4,8 +4,7 @@ import { useReducer, useEffect } from "react";
 import { authReducer } from "./AuthReducer";
 
 const INITIAL_STATE: AuthState = {
-  email: "",
-  accessToken: "",
+  
 };
 
 interface props {
@@ -26,11 +25,16 @@ export const AuthProvider = ({ children }: props) => {
     dispatch({ type: "login", payload: { email, accessToken } });
   };
 
+  const logout = () => {
+    dispatch({ type: "logout"});
+  }
+
   return (
     <AuthContext.Provider
       value={{
         authState,
         login,
+        logout
       }}
     >
       {children}

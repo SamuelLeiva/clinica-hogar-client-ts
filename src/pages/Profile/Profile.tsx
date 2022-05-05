@@ -2,8 +2,12 @@ import { Box, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import { MY_PROFILE_URL } from "../../constants/server_uris";
+import { useAuth } from "../../hooks/useAuth";
 
 const Profile = () => {
+
+  const { accessToken} = useAuth();
+
   const [profile, setProfile] = useState({
     name: "",
     lastNames: "",
@@ -13,11 +17,9 @@ const Profile = () => {
   });
 
   const fetchProfile = async () => {
-    const authData = JSON.parse(localStorage.getItem("hogar-auth"));
-    console.log("authData", authData);
     const response = await axios.get(MY_PROFILE_URL, {
       headers: {
-        Authorization: authData.accessToken,
+        Authorization: accessToken,
       },
     });
 
@@ -97,16 +99,7 @@ const Profile = () => {
             </Typography>
           </Box>
         </Grid>
-        {/* <Grid item xs={6} width="45%">
-          <Box bgcolor="lightpink" borderBottom="2px solid" p={2} mb={1} mx={1}>
-            <Typography align="left">Email:</Typography>
-          </Box>
-        </Grid>
-        <Grid item xs={6} width="45%">
-          <Box bgcolor="lightpink" borderBottom="2px solid" p={2} mb={1} mx={1}>
-            <Typography align="left">Contraseña:</Typography>
-          </Box>
-        </Grid> */}
+        
       </Grid>
     </>
   );

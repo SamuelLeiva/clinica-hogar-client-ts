@@ -27,7 +27,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (email !== "" && accessToken !== "") navigate("/dashboard");
+    if (email && accessToken) navigate("/dashboard/services");
   });
 
   const {

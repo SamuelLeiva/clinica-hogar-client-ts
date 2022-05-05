@@ -16,16 +16,19 @@ import { Link } from "react-router-dom";
 import { PowerSettingsNew } from "@mui/icons-material";
 
 import logo from "../../assets/clinica-logo.png";
-import { fontSize } from "@mui/system";
+import { useAuth } from "../../hooks/useAuth";
 
 const pages = [
   { link: "Agendar cita", nav: "services" },
   { link: "Mis citas", nav: "appointments" },
   { link: "Mi perfil", nav: "profile" },
 ];
-const settings = ["Mi cuenta", "Salir"];
+const settings = [ "Salir"];
 
 const Navbar = () => {
+
+  const { logout } = useAuth()
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -47,6 +50,11 @@ const Navbar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const loggingOut = () => {
+    logout()
+    window.location.reload();
+  }
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "#cb5edb" }}>
@@ -172,7 +180,7 @@ const Navbar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={loggingOut}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
