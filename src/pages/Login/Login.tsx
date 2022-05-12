@@ -54,11 +54,11 @@ const LoginPage = () => {
   //---------------------------------------------------
 
   const onSubmit = async (data: any) => {
-    const { email: userEmail, password } = data;
+    const { email, password } = data;
     //llamar a la api
     try {
       const response = await axios.post(LOGIN_URL, {
-        userEmail,
+        email,
         password,
       });
 
@@ -66,10 +66,10 @@ const LoginPage = () => {
 
       if (response) {
         //extraemos el token
-        const token = response?.data?.token;
+        const token = response?.data?.accessToken;
 
         //cambiamos el state
-        login(userEmail, token);
+        login(email, token);
       }
 
       navigate("/dashboard");

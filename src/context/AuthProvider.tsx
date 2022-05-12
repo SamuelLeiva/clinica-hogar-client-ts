@@ -29,11 +29,16 @@ export const AuthProvider = ({ children }: props) => {
     dispatch({ type: "logout"});
   }
 
+  const refreshToken = (accessToken: string) => {
+    dispatch({ type: "refreshToken", payload: { accessToken } });
+  }
+
   return (
     <AuthContext.Provider
       value={{
         authState,
         login,
+        refreshToken,
         logout
       }}
     >

@@ -1,6 +1,9 @@
 import { AuthState } from "../interfaces/auth";
 
-type AuthAction = { type: "login"; payload: AuthState } | { type: "logout";};
+type AuthAction =
+  | { type: "login"; payload: AuthState } 
+  | { type: "logout" }
+  | { type: "refreshToken"; payload: AuthState };
 
 export const authReducer = (state: AuthState, action: AuthAction) => {
   console.log("action", action);
@@ -12,10 +15,13 @@ export const authReducer = (state: AuthState, action: AuthAction) => {
         email: action.payload.email,
         accessToken: action.payload.accessToken,
       };
-      case "logout":
-        return {
-
-        };
+    case "refreshToken":
+      return {
+        ...state,
+        accessToken: action.payload.accessToken,
+      }
+    case "logout":
+      return {};
 
     default:
       return state;
