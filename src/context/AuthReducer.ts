@@ -6,7 +6,7 @@ type AuthAction =
   | { type: "refreshToken"; payload: AuthState };
 
 export const authReducer = (state: AuthState, action: AuthAction) => {
-  console.log("action", action);
+  //console.log("action", action);
 
   switch (action.type) {
     case "login":

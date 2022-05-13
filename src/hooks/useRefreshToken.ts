@@ -12,12 +12,12 @@ const useRefreshToken = () => {
     });
 
     //accessToken antes de refrescar
-    console.log("prev accessToken", accessToken);
+    //console.log("prev accessToken", accessToken);
 
     //cambiamos el state (valor de accessToken)
     refreshToken(response.data.accessToken);
     //accessToken luego de refrescar
-    console.log("new accessToken", accessToken);
+    //console.log("new accessToken", response.data.accessToken);
 
     return response.data.accessToken; //regresamos el token para usarlo en nuestra request
   };

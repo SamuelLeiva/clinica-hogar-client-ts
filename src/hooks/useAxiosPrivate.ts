@@ -3,6 +3,7 @@ import { axiosPrivate } from "../api/axios";
 import { useAuth } from "./useAuth";
 import useRefreshToken from "./useRefreshToken";
 
+//it will attach the interceptors to this axios instance
 const useAxiosPrivate = () => {
   const { refresh } = useRefreshToken();
   const { email, accessToken } = useAuth();
@@ -19,14 +20,14 @@ const useAxiosPrivate = () => {
     );
 
     const responseIntercept = axiosPrivate.interceptors.response.use(
-      (response) => response,
-      async (error) => {
+      (response) => response, //if the response is good
+      async (error) => { //if there is an error like jwt expired
         const prevRequest = error?.config;
-        if (error?.response?.status === 403 && !prevRequest.sent) {
+        if (error?.response?.status === 403 && !prevRequest?.sent) {
           prevRequest.sent = true;
-          console.log("Antes de refresh");
+          //console.log("Antes de refresh");
           const newAccessToken = await refresh();
-          console.log("newAccessToken", newAccessToken);
+          //console.log("newAccessToken", newAccessToken);
           prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
           return axiosPrivate(prevRequest);
         }
