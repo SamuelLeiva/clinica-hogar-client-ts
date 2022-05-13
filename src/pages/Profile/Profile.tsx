@@ -5,40 +5,41 @@ import axios from "../../api/axios";
 import { MY_PROFILE_URL } from "../../constants/server_uris";
 import { useAuth } from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useRefreshToken from "../../hooks/useRefreshToken";
 
 const Profile = () => {
+  //const { accessToken } = useAuth();
 
-  const { accessToken} = useAuth();
+  const { refresh } = useRefreshToken();
 
-  const [profile, setProfile] = useState({
-    
-  });
+  const [profile, setProfile] = useState({});
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
 
   useEffect(() => {
     let isMounted = true;
-        const controller = new AbortController();
+    const controller = new AbortController();
 
-        const getProfile = async () => {
-            try {
-                const response = await axiosPrivate.get(MY_PROFILE_URL, {
-                    signal: controller.signal
-                });
-                console.log(response.data);
-                isMounted && setProfile(response); //extraer las propiedades de data y ponerlas en profile
-            } catch (err) {
-                console.error(err);
-                navigate('/');
-            }
-        }
+    const getProfile = async () => {
+      try {
+        const response = await axios.get(MY_PROFILE_URL, {
+          signal: controller.signal,
+        });
+        console.log(response.data);
+        isMounted && setProfile(response); //extraer las propiedades de data y ponerlas en profile
+      } catch (err) {
+        console.error(err);
+        navigate("/");
+      }
+    };
 
-        getProfile();
+    getProfile();
 
-        return () => {
-            isMounted = false;
-            controller.abort();
-        }
+    //cleanup function
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
   }, []);
 
   // const fetchProfile = async (signal: any, isMounted: Boolean) => {
@@ -56,34 +57,34 @@ const Profile = () => {
   //       birthday: response.data.birthday,
   //   })
 
-    // try {
-    //   const response = await axiosPrivate.get(
-    //     MY_PROFILE_URL, {
-    //       signal
-    //     }
-    //   )
-  
-    //   console.log('response :>> ', response);
-  
-    //   isMounted && setProfile({
-    //     name: response.data.firstName,
-    //     lastNames: response.data.lastNameF + " " + response.data.lastNameM,
-    //     phoneNumber: response.data.phoneNumber,
-    //     document: response.data.document,
-    //     birthday: response.data.birthday,
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    //   navigate('/')
-    // }
+  // try {
+  //   const response = await axiosPrivate.get(
+  //     MY_PROFILE_URL, {
+  //       signal
+  //     }
+  //   )
 
-    
+  //   console.log('response :>> ', response);
+
+  //   isMounted && setProfile({
+  //     name: response.data.firstName,
+  //     lastNames: response.data.lastNameF + " " + response.data.lastNameM,
+  //     phoneNumber: response.data.phoneNumber,
+  //     document: response.data.document,
+  //     birthday: response.data.birthday,
+  //   });
+  // } catch (error) {
+  //   console.log(error);
+  //   navigate('/')
+  // }
 
   //   console.log("profile", profile);
   // };
 
   return (
     <>
+      <button onClick={() => refresh()}>Refresh</button>
+      <br />
       <Typography variant="h2" mt={2}>
         Mi perfil:
       </Typography>
@@ -143,7 +144,6 @@ const Profile = () => {
             </Typography>
           </Box>
         </Grid>
-        
       </Grid>
     </>
   );

@@ -57,10 +57,17 @@ const LoginPage = () => {
     const { email, password } = data;
     //llamar a la api
     try {
-      const response = await axios.post(LOGIN_URL, {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        LOGIN_URL,
+        {
+          email,
+          password,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
 
       console.log("response", response);
 

@@ -1,9 +1,14 @@
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import useRefreshToken from "../../hooks/useRefreshToken";
 
 const ServicesPage = () => {
+  const { refresh } = useRefreshToken();
+
   return (
     <>
+      <button onClick={() => refresh()}>Refresh</button>
+      <br />
       <Typography variant="h2" mt={2}>
         Elija el tipo de cita:
       </Typography>
