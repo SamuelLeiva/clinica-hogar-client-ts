@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Paper, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -28,7 +28,16 @@ const Profile = () => {
           signal: controller.signal,
         });
         //console.log(response.data);
-        isMounted && setProfile(response.data); //extraer las propiedades de data y ponerlas en profile
+        isMounted &&
+          setProfile({
+            email: response.data.email,
+            firstName: response.data.firstName,
+            lastNameF: response.data.lastNameF,
+            lastNameM: response.data.lastNameM,
+            document: response.data.document,
+            birthday: response.data.birthday,
+            phoneNumber: response.data.phoneNumber,
+          }); //extraer las propiedades de data y ponerlas en profile
       } catch (err) {
         //console.error(err);
         navigate("/");
@@ -50,59 +59,57 @@ const Profile = () => {
         Mi perfil:
       </Typography>
       <Grid container my={5} mx="auto" width="70%">
-        <Grid item xs={6} width="45%">
-          <Box
-            bgcolor="lightpink"
-            borderBottom="2px solid"
-            p={2}
-            mt={5}
-            mb={1}
-            mx={1}
-          >
-            <Typography align="left">
-              Nombre: <b>{ profile.firstName }</b>
-            </Typography>
+        <Grid item xs= {12} md={6} width="45%">
+          <Box p={2} mt={5} mb={1} mx={1}>
+            <Paper sx={{ padding: 2 }}>
+              <Typography align="left">
+                Nombre: <b>{profile.firstName}</b>
+              </Typography>
+            </Paper>
           </Box>
         </Grid>
-        <Grid item xs={6} width="45%">
-          <Box
-            bgcolor="lightpink"
-            borderBottom="2px solid"
-            p={2}
-            mt={5}
-            mb={1}
-            mx={1}
-          >
-            <Typography align="left">
-              Apellidos: <b>{ `${profile.lastNameF} ${profile.lastNameM}`}</b>
-            </Typography>
+        <Grid item xs= {12} md={6} width="45%">
+          <Box p={2} mt={5} mb={1} mx={1}>
+            <Paper sx={{ padding: 2 }}>
+              <Typography align="left">
+                Apellidos: <b>{`${profile.lastNameF} ${profile.lastNameM}`}</b>
+              </Typography>
+            </Paper>
           </Box>
         </Grid>
-        <Grid item xs={6} width="45%">
-          <Box bgcolor="lightpink" borderBottom="2px solid" p={2} mb={1} mx={1}>
-            <Typography align="left">
-              Documento: <b>{profile.document}</b>
-            </Typography>
+        <Grid item xs= {12} md={6} width="45%">
+          <Box p={2} mb={1} mx={1}>
+            <Paper sx={{ padding: 2 }}>
+              <Typography align="left">
+                Documento: <b>{profile.document}</b>
+              </Typography>
+            </Paper>
           </Box>
         </Grid>
-        <Grid item xs={6} width="45%">
-          <Box bgcolor="lightpink" borderBottom="2px solid" p={2} mb={1} mx={1}>
-            <Typography align="left">N° de HC:</Typography>
+        <Grid item xs= {12} md={6} width="45%">
+          <Box p={2} mb={1} mx={1}>
+            <Paper sx={{ padding: 2 }}>
+              <Typography align="left">N° de HC:</Typography>
+            </Paper>
           </Box>
         </Grid>
-        <Grid item xs={6} width="45%">
-          <Box bgcolor="lightpink" borderBottom="2px solid" p={2} mb={1} mx={1}>
-            <Typography align="left">
-              Fecha de Nacimiento:{" "}
-              <b>{profile.birthday.replace("T00:00:00.000Z", "")}</b>
-            </Typography>
+        <Grid item xs= {12} md={6} width="45%">
+          <Box p={2} mb={1} mx={1}>
+            <Paper sx={{ padding: 2 }}>
+              <Typography align="left">
+                Fecha de Nacimiento:{" "}
+                <b>{profile.birthday.replace("T00:00:00.000Z", "")}</b>
+              </Typography>
+            </Paper>
           </Box>
         </Grid>
-        <Grid item xs={6} width="45%">
-          <Box bgcolor="lightpink" borderBottom="2px solid" p={2} mb={1} mx={1}>
-            <Typography align="left">
-              Núm. de teléfono: <b>{profile.phoneNumber}</b>
-            </Typography>
+        <Grid item xs= {12} md={6} width="45%">
+          <Box p={2} mb={1} mx={1}>
+            <Paper sx={{ padding: 2 }}>
+              <Typography align="left">
+                Núm. de teléfono: <b>{profile.phoneNumber}</b>
+              </Typography>
+            </Paper>
           </Box>
         </Grid>
       </Grid>
