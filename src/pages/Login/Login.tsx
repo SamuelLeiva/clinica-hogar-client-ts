@@ -27,7 +27,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (email !== "" && accessToken !== "") navigate("/dashboard");
+    if (email && accessToken) navigate("/dashboard/services");
   });
 
   const {
@@ -54,22 +54,29 @@ const LoginPage = () => {
   //---------------------------------------------------
 
   const onSubmit = async (data: any) => {
-    const { email: userEmail, password } = data;
+    const { email, password } = data;
     //llamar a la api
     try {
-      const response = await axios.post(LOGIN_URL, {
-        userEmail,
-        password,
-      });
+      const response = await axios.post(
+        LOGIN_URL,
+        {
+          email,
+          password,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
 
       console.log("response", response);
 
       if (response) {
         //extraemos el token
-        const token = response?.data?.token;
+        const token = response?.data?.accessToken;
 
         //cambiamos el state
-        login(userEmail, token);
+        login(email, token);
       }
 
       navigate("/dashboard");
