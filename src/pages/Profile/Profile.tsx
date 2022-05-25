@@ -59,7 +59,7 @@ const Profile = () => {
         Mi perfil:
       </Typography>
       <Grid container my={5} mx="auto" width="70%">
-        <Grid item xs= {12} md={6} width="45%">
+        <Grid item xs={12} md={6} width="45%">
           <Box p={2} mt={5} mb={1} mx={1}>
             <Paper sx={{ padding: 2 }}>
               <Typography align="left">
@@ -68,7 +68,7 @@ const Profile = () => {
             </Paper>
           </Box>
         </Grid>
-        <Grid item xs= {12} md={6} width="45%">
+        <Grid item xs={12} md={6} width="45%">
           <Box p={2} mt={5} mb={1} mx={1}>
             <Paper sx={{ padding: 2 }}>
               <Typography align="left">
@@ -77,7 +77,7 @@ const Profile = () => {
             </Paper>
           </Box>
         </Grid>
-        <Grid item xs= {12} md={6} width="45%">
+        <Grid item xs={12} md={6} width="45%">
           <Box p={2} mb={1} mx={1}>
             <Paper sx={{ padding: 2 }}>
               <Typography align="left">
@@ -86,14 +86,14 @@ const Profile = () => {
             </Paper>
           </Box>
         </Grid>
-        <Grid item xs= {12} md={6} width="45%">
+        {/* <Grid item xs= {12} md={6} width="45%">
           <Box p={2} mb={1} mx={1}>
             <Paper sx={{ padding: 2 }}>
               <Typography align="left">N° de HC:</Typography>
             </Paper>
           </Box>
-        </Grid>
-        <Grid item xs= {12} md={6} width="45%">
+        </Grid> */}
+        <Grid item xs={12} md={6} width="45%">
           <Box p={2} mb={1} mx={1}>
             <Paper sx={{ padding: 2 }}>
               <Typography align="left">
@@ -103,7 +103,7 @@ const Profile = () => {
             </Paper>
           </Box>
         </Grid>
-        <Grid item xs= {12} md={6} width="45%">
+        <Grid item xs={12} md={6} width="45%">
           <Box p={2} mb={1} mx={1}>
             <Paper sx={{ padding: 2 }}>
               <Typography align="left">
