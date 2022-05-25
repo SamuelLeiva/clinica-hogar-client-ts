@@ -31,8 +31,8 @@ const Appointments = () => {
         //console.log(response.data);
         isMounted && setAppointments([...response.data]); //extraer las propiedades de data y ponerlas en profile
       } catch (err) {
-        //console.error(err);
-        navigate("/");
+        console.error(err);
+        //navigate("/");
       }
     };
 
