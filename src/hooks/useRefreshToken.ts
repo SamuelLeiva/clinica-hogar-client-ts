@@ -3,7 +3,7 @@ import { REFRESH_URL } from "../constants/server_uris";
 import { useAuth } from "./useAuth";
 
 const useRefreshToken = () => {
-  const { accessToken, refreshToken } = useAuth();
+  const { refreshToken } = useAuth();
 
   //refreca token
   const refresh = async () => {

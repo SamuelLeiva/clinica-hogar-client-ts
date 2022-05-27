@@ -5,6 +5,8 @@ import {
   Box,
   Alert,
   Snackbar,
+  Link,
+  Typography,
 } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
@@ -137,7 +139,16 @@ const LoginPage = () => {
               <Alert severity="error">Este campo no puede estar vacío</Alert>
             )}
           </Box>
-          <Button type="submit" variant="contained" color="primary" fullWidth>
+          <Typography sx={{ fontSize: 13 }}>
+            ¿No tiene una cuenta? <Link href="/register">Regístrese aquí</Link>
+          </Typography>
+          <Button
+            sx={{ marginTop: 2 }}
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+          >
             Ingresar
           </Button>
         </form>

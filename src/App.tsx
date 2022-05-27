@@ -5,13 +5,15 @@ import DashboardPage from "./pages/Dashboard/Dashboard";
 import Services from "./pages/Services/Services";
 import Appointments from "./pages/Appointments/Appointments";
 import Profile from "./pages/Profile/Profile";
+import RegisterPage from "./pages/Register/Register";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage />} />.
+          <Route path="/" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
           <Route path="dashboard" element={<DashboardPage />}>
             <Route path="services" element={<Services />} />
             <Route path="appointments" element={<Appointments />} />
