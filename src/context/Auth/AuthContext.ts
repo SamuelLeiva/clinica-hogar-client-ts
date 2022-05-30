@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { AuthState } from "../interfaces/auth";
+import { AuthState } from "../../interfaces/Auth/auth";
 
 export type AuthContextProps = {
   authState: AuthState;

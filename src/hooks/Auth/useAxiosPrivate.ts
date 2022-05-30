@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { axiosPrivate } from "../api/axios";
+import { axiosPrivate } from "../../services/axios";
 import { useAuth } from "./useAuth";
 import useRefreshToken from "./useRefreshToken";
 
@@ -21,7 +21,8 @@ const useAxiosPrivate = () => {
 
     const responseIntercept = axiosPrivate.interceptors.response.use(
       (response) => response, //if the response is good
-      async (error) => { //if there is an error like jwt expired
+      async (error) => {
+        //if there is an error like jwt expired
         const prevRequest = error?.config;
         if (error?.response?.status === 403 && !prevRequest?.sent) {
           prevRequest.sent = true;

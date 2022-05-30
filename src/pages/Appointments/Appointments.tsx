@@ -7,9 +7,8 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { MY_APPOINTMENTS_URL } from "../../constants/server_uris";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../hooks/Auth/useAxiosPrivate";
 
 const Appointments = () => {
   //Accordion logic
@@ -17,7 +16,6 @@ const Appointments = () => {
 
   const [appointments, setAppointments] = useState([]);
   const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
 
   useEffect(() => {
     let isMounted = true;

@@ -16,9 +16,11 @@ import {
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import axios from "../../api/axios";
-import { LOGIN_URL, REGISTER_URL } from "../../constants/server_uris";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../hooks/Auth/useAuth";
+import {
+  loginService,
+  registerService,
+} from "../../services/auth/authServices";
 
 type FormData = {
   email: string;
@@ -86,51 +88,30 @@ const RegisterPage = () => {
       return console.log("Las contraseñas no coinciden.");
     }
     try {
-      const response = await axios.post(
-        REGISTER_URL,
-        {
-          email,
-          password,
-          firstName,
-          lastNameF,
-          lastNameM,
-          document,
-          documentType,
-          birthday,
-          sex,
-          phoneNumber,
-        },
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
+      const response = await registerService(
+        email,
+        password,
+        firstName,
+        lastNameF,
+        lastNameM,
+        document,
+        documentType,
+        birthday,
+        sex,
+        phoneNumber
       );
 
       console.log("response", response);
 
-      //refinar el if
       if (response.status === 201) {
-        //(proceso de login)
-        const responseLogin = await axios.post(
-          LOGIN_URL,
-          {
-            email,
-            password,
-          },
-          {
-            headers: { "Content-Type": "application/json" },
-            withCredentials: true,
-          }
-        );
+        const responseLogin = await loginService(email, password);
 
         if (responseLogin) {
-          //extraemos el token
           const token = responseLogin?.data?.accessToken;
 
           //cambiamos el state
           login(email, token);
 
-          //-------------------
           navigate("/dashboard/services");
         }
       }

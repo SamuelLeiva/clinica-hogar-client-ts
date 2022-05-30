@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { MY_PROFILE_URL } from "../../constants/server_uris";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../hooks/Auth/useAxiosPrivate";
+import { myProfileService } from "../../services/user/userServices";
 
 const Profile = () => {
   const [profile, setProfile] = useState({
@@ -24,10 +25,12 @@ const Profile = () => {
 
     const getProfile = async () => {
       try {
-        const response = await axiosPrivate.get(MY_PROFILE_URL, {
-          signal: controller.signal,
-        });
-        //console.log(response.data);
+        // const response = await axiosPrivate.get(MY_PROFILE_URL, {
+        //   signal: controller.signal,
+        // });
+
+        const response = await myProfileService(controller);
+
         isMounted &&
           setProfile({
             email: response.data.email,
@@ -39,7 +42,6 @@ const Profile = () => {
             phoneNumber: response.data.phoneNumber,
           }); //extraer las propiedades de data y ponerlas en profile
       } catch (err) {
-        //console.error(err);
         navigate("/");
       }
     };

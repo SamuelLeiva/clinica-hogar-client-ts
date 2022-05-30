@@ -1,33 +1,31 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
+
+import MenuIcon from "@mui/icons-material/Menu";
 import { PowerSettingsNew } from "@mui/icons-material";
 
-import logo from "../../assets/clinica-logo.png";
-import { useAuth } from "../../hooks/useAuth";
+import logo from "../../assets/images/clinica-logo.png";
+import { useAuth } from "../../hooks/Auth/useAuth";
 
 const pages = [
   { link: "Agendar cita", nav: "services" },
   { link: "Mis citas", nav: "appointments" },
   { link: "Mi perfil", nav: "profile" },
 ];
-const settings = [ "Salir"];
+const settings = ["Salir"];
 
 const Navbar = () => {
-
-  const { logout } = useAuth()
+  const { logout } = useAuth();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -52,9 +50,9 @@ const Navbar = () => {
   };
 
   const loggingOut = () => {
-    logout()
+    logout();
     window.location.reload();
-  }
+  };
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "#cb5edb" }}>
@@ -150,9 +148,6 @@ const Navbar = () => {
                 size="large"
               >
                 {page.link}
-                {/* <Typography textAlign="center" color="white">
-                  <Link to={`/dashboard/${page.nav}`}>{page.link}</Link>
-                </Typography> */}
               </Button>
             ))}
           </Box>

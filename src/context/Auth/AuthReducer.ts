@@ -1,13 +1,11 @@
-import { AuthState } from "../interfaces/auth";
+import { AuthState } from "../../interfaces/Auth/auth";
 
 type AuthAction =
-  | { type: "login"; payload: AuthState } 
+  | { type: "login"; payload: AuthState }
   | { type: "logout" }
   | { type: "refreshToken"; payload: AuthState };
 
 export const authReducer = (state: AuthState, action: AuthAction) => {
-  //console.log("action", action);
-
   switch (action.type) {
     case "login":
       return {
@@ -19,7 +17,7 @@ export const authReducer = (state: AuthState, action: AuthAction) => {
       return {
         ...state,
         accessToken: action.payload.accessToken,
-      }
+      };
     case "logout":
       return {};
 

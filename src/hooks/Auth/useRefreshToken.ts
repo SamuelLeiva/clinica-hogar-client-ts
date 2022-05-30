@@ -1,6 +1,6 @@
-import axios from "../api/axios";
-import { REFRESH_URL } from "../constants/server_uris";
+import axios from "../../services/axios";
 import { useAuth } from "./useAuth";
+import { REFRESH_URL } from "../../constants/server_uris";
 
 const useRefreshToken = () => {
   const { refreshToken } = useAuth();
