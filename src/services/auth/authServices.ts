@@ -1,4 +1,8 @@
-import { LOGIN_URL, REGISTER_URL } from "../../constants/server_uris";
+import {
+  LOGIN_URL,
+  LOGOUT_URL,
+  REGISTER_URL,
+} from "../../constants/server_uris";
 import axios from "../axios";
 
 const loginService = async (email: string, password: string) => {
@@ -51,6 +55,8 @@ const registerService = async (
   return response;
 };
 
-const logout = async () => {};
+const logoutService = async () => {
+  await axios.post(LOGOUT_URL);
+};
 
-export { loginService, registerService, logout };
+export { loginService, registerService, logoutService };
