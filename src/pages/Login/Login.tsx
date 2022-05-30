@@ -12,11 +12,12 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import logo from "../../assets/clinica-logo.png";
-import axios from "../../api/axios";
-import { useAuth } from "../../hooks/useAuth";
+import logo from "../../assets/images/clinica-logo.png";
+
+import { useAuth } from "../../hooks/Auth/useAuth";
 import { useEffect, useState } from "react";
-import { LOGIN_URL } from "../../constants/server_uris";
+
+import { loginService } from "../../services/auth/authServices";
 
 type FormData = {
   email: string;
@@ -59,17 +60,7 @@ const LoginPage = () => {
     const { email, password } = data;
     //llamar a la api
     try {
-      const response = await axios.post(
-        LOGIN_URL,
-        {
-          email,
-          password,
-        },
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
+      const response = await loginService(email, password);
 
       console.log("response", response);
 
@@ -77,7 +68,7 @@ const LoginPage = () => {
         //extraemos el token
         const token = response?.data?.accessToken;
 
-        //cambiamos el state
+        //cambiamos el state del context
         login(email, token);
       }
 

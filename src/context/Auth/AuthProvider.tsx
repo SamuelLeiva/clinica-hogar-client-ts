@@ -1,11 +1,10 @@
-import { AuthContext } from "./AuthContext";
-import { AuthState } from "../interfaces/auth";
 import { useReducer, useEffect } from "react";
-import { authReducer } from "./AuthReducer";
 
-const INITIAL_STATE: AuthState = {
-  
-};
+import { AuthContext } from "./AuthContext";
+import { authReducer } from "./AuthReducer";
+import { AuthState } from "../../interfaces/Auth/auth";
+
+const INITIAL_STATE: AuthState = {};
 
 interface props {
   children: JSX.Element | JSX.Element[];
@@ -26,12 +25,12 @@ export const AuthProvider = ({ children }: props) => {
   };
 
   const logout = () => {
-    dispatch({ type: "logout"});
-  }
+    dispatch({ type: "logout" });
+  };
 
   const refreshToken = (accessToken: string) => {
     dispatch({ type: "refreshToken", payload: { accessToken } });
-  }
+  };
 
   return (
     <AuthContext.Provider
@@ -39,12 +38,10 @@ export const AuthProvider = ({ children }: props) => {
         authState,
         login,
         refreshToken,
-        logout
+        logout,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
-
-//export default AuthContext;
