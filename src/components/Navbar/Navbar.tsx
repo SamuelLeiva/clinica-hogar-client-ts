@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,7 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { PowerSettingsNew } from "@mui/icons-material";
 
 import logo from "../../assets/images/clinica-logo.png";
-import { useAuth } from "../../hooks/Auth/useAuth";
+import useLogout from "../../hooks/Auth/useLogout";
 
 const pages = [
   { link: "Agendar cita", nav: "services" },
@@ -25,7 +25,9 @@ const pages = [
 const settings = ["Salir"];
 
 const Navbar = () => {
-  const { logout } = useAuth();
+  //const { logout } = useAuth();
+  const navigate = useNavigate();
+  const { logOut } = useLogout();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -49,9 +51,10 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
-  const loggingOut = () => {
-    logout();
-    window.location.reload();
+  const loggingOut = async () => {
+    await logOut();
+    navigate("/");
+    //window.location.reload();
   };
 
   return (
