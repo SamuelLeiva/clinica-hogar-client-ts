@@ -1,15 +1,12 @@
-import axios from "../../services/axios";
 import { useAuth } from "./useAuth";
-import { REFRESH_URL } from "../../constants/server_uris";
+import { refreshTokenService } from "../../services/auth/authServices";
 
 const useRefreshToken = () => {
   const { refreshToken } = useAuth();
 
-  //refreca token
+  //refresca token
   const refresh = async () => {
-    const response = await axios.get(REFRESH_URL, {
-      withCredentials: true, //indica que va a haber cookies
-    });
+    const response = await refreshTokenService();
 
     //accessToken antes de refrescar
     //console.log("prev accessToken", accessToken);

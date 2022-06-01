@@ -1,6 +1,7 @@
 import {
   LOGIN_URL,
   LOGOUT_URL,
+  REFRESH_URL,
   REGISTER_URL,
 } from "../../constants/server_uris";
 import axios from "../axios";
@@ -56,7 +57,16 @@ const registerService = async (
 };
 
 const logoutService = async () => {
-  await axios.post(LOGOUT_URL);
+  await axios(LOGOUT_URL, {
+    withCredentials: true,
+  });
 };
 
-export { loginService, registerService, logoutService };
+const refreshTokenService = async () => {
+  const response = await axios.get(REFRESH_URL, {
+    withCredentials: true, //indica que va a haber cookies
+  });
+  return response;
+};
+
+export { loginService, registerService, logoutService, refreshTokenService };
