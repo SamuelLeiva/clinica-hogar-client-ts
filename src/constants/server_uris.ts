@@ -6,4 +6,6 @@ export const LOGOUT_URL = process.env.REACT_APP_AUTH_ROUTES_URL + "/logout";
 export const MY_PROFILE_URL = process.env.REACT_APP_USER_ROUTES_URL + "/me";
 
 export const MY_APPOINTMENTS_URL =
-  process.env.REACT_APP_APPOINTMENTS_ROUTES_URL + "/myAppointments";
+  process.env.REACT_APP_APPOINTMENTS_ROUTES_URL + "/patient";
+export const MY_PATIENTS_URL =
+  process.env.REACT_APP_PATIENTS_ROUTES_URL + "/myPatients";

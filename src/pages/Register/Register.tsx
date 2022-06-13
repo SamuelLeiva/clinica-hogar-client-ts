@@ -309,6 +309,7 @@ const RegisterPage = () => {
                   {...register("password", {
                     required: true,
                   })}
+                  type="password"
                   variant="outlined"
                   label="contraseña"
                   fullWidth
@@ -327,6 +328,7 @@ const RegisterPage = () => {
                   {...register("password2", {
                     required: true,
                   })}
+                  type="password"
                   variant="outlined"
                   label="confirmar contraseña"
                   fullWidth
@@ -353,7 +355,7 @@ const RegisterPage = () => {
               color="primary"
               fullWidth
             >
-              Ingresar
+              Registrarse
             </Button>
           </Grid>
         </form>
