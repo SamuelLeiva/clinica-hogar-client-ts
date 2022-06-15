@@ -124,6 +124,12 @@ const Appointments = () => {
                                 {appo.medic.speciality.name}
                               </Typography>
                             </Grid>
+                            <Grid item xs={5}></Grid>
+                            <Grid item xs={7} textAlign={"end"}>
+                              <Typography variant="h6">
+                                {`CITA ${appo.appointmentType}`}
+                              </Typography>
+                            </Grid>
                             <Grid item xs={6} textAlign={"start"}>
                               <b>Paciente: </b>
                             </Grid>
