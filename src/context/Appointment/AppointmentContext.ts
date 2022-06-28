@@ -3,7 +3,12 @@ import { AppointmentState } from "../../interfaces/Appointment/appointment";
 
 export type AppointmentContextProps = {
   appointmentState: AppointmentState;
+  addAppointmentType: (appointmentType: string) => void;
+  addSpecialityData: (specialityId: string) => void;
+  addMedicData: (medicId: string) => void;
+  addAppointmentDate: (date: Date) => void;
   addPatientData: (
+    patientId: string,
     firstName: string,
     lastNameF: string,
     lastNameM: string,
@@ -13,12 +18,7 @@ export type AppointmentContextProps = {
     sex: string,
     phoneNumber: string
   ) => void;
-  addMedicData: (medicId: string) => void;
-  addAppointmentData: (
-    patientId: string,
-    appointmentType: string,
-    date: Date
-  ) => void;
+  changePage: (page: number) => void;
 };
 
 export const AppointmentContext = createContext<AppointmentContextProps>(

@@ -1,9 +1,23 @@
 import { AppointmentState } from "../../interfaces/Appointment/appointment";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { appointmentReducer } from "./AppointmentReducer";
 import { AppointmentContext } from "./AppointmentContext";
 
-const INITIAL_STATE: AppointmentState = {};
+const INITIAL_STATE: AppointmentState = {
+  // firstName: "",
+  // lastNameF: "",
+  // lastNameM: "",
+  // documentType: "",
+  // document: "",
+  // birthday: new Date(),
+  // sex: "",
+  // phoneNumber: "",
+  // medicId: "",
+  // patientId: "",
+  // appointmentType: "",
+  // date: new Date(),
+  // page: 0,
+};
 
 interface props {
   children: JSX.Element | JSX.Element[];
@@ -12,13 +26,44 @@ interface props {
 export const AppointmentProvider = ({ children }: props) => {
   const [appointmentState, dispatch] = useReducer(
     appointmentReducer,
-    INITIAL_STATE
+    INITIAL_STATE,
+    () => {
+      const localData = localStorage.getItem("create-appointment-info");
+      return localData ? JSON.parse(localData) : INITIAL_STATE;
+    }
     //() => {
     //obtener cosas de local data o algo (ver AuthProvider)
     //}
   );
 
+  useEffect(() => {
+    localStorage.setItem(
+      "create-appointment-info",
+      JSON.stringify(appointmentState)
+    );
+  }, [appointmentState]);
+
+  const addAppointmentType = (appointmentType: string) => {
+    dispatch({ type: "addAppointmentType", payload: { appointmentType } });
+  };
+
+  const addSpecialityData = (specialityId: string) => {
+    dispatch({ type: "addSpecialityData", payload: { specialityId } });
+  };
+
+  const addMedicData = (medicId: string) => {
+    dispatch({ type: "addMedicData", payload: { medicId } });
+  };
+
+  const addAppointmentDate = (date: Date) => {
+    dispatch({
+      type: "addAppointmentDate",
+      payload: { date },
+    });
+  };
+
   const addPatientData = (
+    patientId: string,
     firstName: string,
     lastNameF: string,
     lastNameM: string,
@@ -31,6 +76,7 @@ export const AppointmentProvider = ({ children }: props) => {
     dispatch({
       type: "addPatientData",
       payload: {
+        patientId,
         firstName,
         lastNameF,
         lastNameM,
@@ -43,18 +89,10 @@ export const AppointmentProvider = ({ children }: props) => {
     });
   };
 
-  const addMedicData = (medicId: string) => {
-    dispatch({ type: "addMedicData", payload: { medicId } });
-  };
-
-  const addAppointmentData = (
-    patientId: string,
-    appointmentType: string,
-    date: Date
-  ) => {
+  const changePage = (page: number) => {
     dispatch({
-      type: "addAppointmentData",
-      payload: { patientId, appointmentType, date },
+      type: "changePage",
+      payload: { page },
     });
   };
 
@@ -62,9 +100,12 @@ export const AppointmentProvider = ({ children }: props) => {
     <AppointmentContext.Provider
       value={{
         appointmentState,
-        addPatientData,
+        addAppointmentType,
+        addSpecialityData,
         addMedicData,
-        addAppointmentData,
+        addAppointmentDate,
+        addPatientData,
+        changePage,
       }}
     >
       {children}

@@ -7,8 +7,14 @@ export interface AppointmentState {
   birthday?: Date;
   sex?: string;
   phoneNumber?: string;
+  specialityId?: string;
   medicId?: string;
   patientId?: string;
   appointmentType?: string;
   date?: Date;
+  page?: number;
 }
+
+// export interface StepState {
+//   page?: number;
+// }

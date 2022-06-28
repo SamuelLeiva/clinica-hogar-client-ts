@@ -1,12 +1,15 @@
 import { AppointmentState } from "../../interfaces/Appointment/appointment";
 
 type AppointmentAction =
-  | { type: "addPatientData"; payload: AppointmentState }
+  | { type: "addAppointmentType"; payload: AppointmentState }
+  | { type: "addSpecialityData"; payload: AppointmentState }
   | { type: "addMedicData"; payload: AppointmentState }
   | {
-      type: "addAppointmentData";
+      type: "addAppointmentDate";
       payload: AppointmentState;
-    };
+    }
+  | { type: "addPatientData"; payload: AppointmentState }
+  | { type: "changePage"; payload: AppointmentState };
 
 //aca iria las llamadas a la api y se cambia el state?
 
@@ -15,9 +18,30 @@ export const appointmentReducer = (
   action: AppointmentAction
 ) => {
   switch (action.type) {
+    case "addAppointmentType":
+      return {
+        ...state,
+        appointmentType: action.payload.appointmentType,
+      };
+    case "addSpecialityData":
+      return {
+        ...state,
+        specialityId: action.payload.specialityId,
+      };
+    case "addMedicData":
+      return {
+        ...state,
+        medicId: action.payload.medicId,
+      };
+    case "addAppointmentDate":
+      return {
+        ...state,
+        date: action.payload.date,
+      };
     case "addPatientData":
       return {
         ...state,
+        patientId: action.payload.patientId,
         firstName: action.payload.firstName,
         lastNameF: action.payload.lastNameF,
         lastNameM: action.payload.lastNameM,
@@ -27,17 +51,10 @@ export const appointmentReducer = (
         sex: action.payload.sex,
         phoneNumber: action.payload.phoneNumber,
       };
-    case "addMedicData":
+    case "changePage":
       return {
         ...state,
-        medicId: action.payload.medicId,
-      };
-    case "addAppointmentData":
-      return {
-        ...state,
-        patientId: action.payload.patientId,
-        appointmentType: action.payload.appointmentType,
-        date: action.payload.date,
+        page: action.payload.page,
       };
     default:
       return state;

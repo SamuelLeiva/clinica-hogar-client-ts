@@ -1,53 +1,41 @@
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { useAppointmentCreation } from "../../hooks/AppointmentCreation/useAppointmentCreation";
+
+import SelectAppointmentType from "../../components/AppointmentCreation/SelectAppointmentType";
+import SelectMedic from "../../components/AppointmentCreation/SelectMedic";
+import SelectPatient from "../../components/AppointmentCreation/SelectPatient";
+import SelectSpeciality from "../../components/AppointmentCreation/SelectSpeciality";
+import Schedule from "../../components/AppointmentCreation/Schedule";
+import ConfirmationAndPayment from "../../components/AppointmentCreation/ConfirmationAndPayment";
+import { useEffect } from "react";
 
 const ServicesPage = () => {
-  return (
-    <>
-      <Typography variant="h2" mt={2}>
-        Elija el tipo de cita:
-      </Typography>
-      <Grid
-        container
-        my={5}
-        mx="auto"
-        width="50%"
-        columnSpacing={1}
-        rowSpacing={2}
-      >
-        <Grid item xs={12} lg={6} width="45%">
-          <Card sx={{ minWidth: 275 }}>
-            <CardContent>
-              <Typography variant="h5" component="div">
-                Cita virtual
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small">Agendar cita</Button>
-            </CardActions>
-          </Card>
-        </Grid>
-        <Grid item xs={12} lg={6} width="45%">
-          <Card sx={{ minWidth: 275 }}>
-            <CardContent>
-              <Typography variant="h5" component="div">
-                Cita presencial
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small">Agendar cita</Button>
-            </CardActions>
-          </Card>
-        </Grid>
-      </Grid>
-    </>
-  );
+  //llamar al contexto
+  const { page, changePage } = useAppointmentCreation();
+
+  useEffect(() => {
+    changePage(0);
+  }, []);
+
+  const PageDisplay = () => {
+    switch (page) {
+      case 0:
+        return <SelectAppointmentType></SelectAppointmentType>;
+      case 1:
+        return <SelectSpeciality></SelectSpeciality>;
+      case 2:
+        return <SelectMedic></SelectMedic>;
+      case 3:
+        return <Schedule></Schedule>;
+      case 4:
+        return <SelectPatient></SelectPatient>;
+      case 5:
+        return <ConfirmationAndPayment></ConfirmationAndPayment>;
+      default:
+        return <div>No hay pasos</div>;
+    }
+  };
+
+  return <>{PageDisplay()}</>;
 };
 
 export default ServicesPage;
