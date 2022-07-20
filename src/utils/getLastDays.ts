@@ -55,7 +55,8 @@ const getLastDays = () => {
   days.push({
     day: actualDate.getDay(),
     month: actualDate.getMonth(),
-    number: actualDate.getDate(),
+    dayNumber: actualDate.getDate(),
+    year: actualDate.getFullYear(),
   });
 
   //for para llenar un arreglo con 14 fechas
@@ -64,17 +65,18 @@ const getLastDays = () => {
     days.push({
       day: actualDate.getDay(),
       month: actualDate.getMonth(),
-      number: actualDate.getDate(),
+      dayNumber: actualDate.getDate(),
+      year: actualDate.getFullYear(),
     });
   }
 
   //transformando los dias
-  days.forEach((element) => {
-    element.day = getDayName(element.day);
-    element.month = getMonthName(element.month);
-  });
+  // days.forEach((element) => {
+  //   element.day = getDayName(element.day);
+  //   element.month = getMonthName(element.month);
+  // });
 
   return days;
 };
 
-export { getLastDays };
+export { getLastDays, getMonthName, getDayName };
