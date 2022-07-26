@@ -1,9 +1,10 @@
 import { Typography, Stack, Paper, Button } from "@mui/material";
 import { pink } from "@mui/material/colors";
-import { useState } from "react";
 
-const SelectHour = () => {
-  //const [hours, setHours] = useState([]);
+const SelectHour = ({ daySchedule, dateData, setDateData }) => {
+  const selectHour = (hour: any) => {
+    setDateData({ ...dateData, hour });
+  };
 
   return (
     <>
@@ -18,8 +19,8 @@ const SelectHour = () => {
         mt={2}
         sx={{ overflowX: "auto" }}
       >
-        {/* {schedule &&
-          schedule.map((elem) => {
+        {daySchedule &&
+          daySchedule.map((elem) => {
             return (
               <Paper
                 component={Button}
@@ -31,13 +32,14 @@ const SelectHour = () => {
                   backgroundColor: pink[100],
                 }}
                 onClick={() => {
+                  console.log(elem.hour);
                   selectHour(elem.hour);
                 }}
               >
                 <Typography>{elem.hour}</Typography>
               </Paper>
             );
-          })} */}
+          })}
       </Stack>
     </>
   );
