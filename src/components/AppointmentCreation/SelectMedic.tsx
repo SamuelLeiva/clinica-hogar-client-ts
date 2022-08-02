@@ -27,7 +27,7 @@ const SelectMedic = () => {
 
   const addMedicAndChange = (medicId: string) => {
     addMedicData(medicId);
-    changePage(3);
+    changePage(4);
   };
 
   useEffect(() => {
@@ -36,9 +36,7 @@ const SelectMedic = () => {
 
   return (
     <>
-      <Typography variant="h3" mt={2}>
-        Elija el médico de su preferencia:
-      </Typography>
+      <Typography variant="h3">Elija el médico de su preferencia:</Typography>
       <Grid
         container
         my={5}

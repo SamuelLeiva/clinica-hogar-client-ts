@@ -56,10 +56,6 @@ const Appointments = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log("appointments", appointments);
-  }, [appointments]);
-
   const handleChange =
     (panel: string, id: string) =>
     async (event: React.SyntheticEvent, isExpanded: boolean) => {
@@ -70,7 +66,7 @@ const Appointments = () => {
     };
 
   return (
-    <Box mt={2} mx={5}>
+    <Box mx={5}>
       {patients.length > 0 ? (
         patients.map((patient) => {
           return (

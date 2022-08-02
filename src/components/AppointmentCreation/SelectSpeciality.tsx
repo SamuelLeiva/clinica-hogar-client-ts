@@ -32,9 +32,7 @@ const SelectSpeciality = () => {
 
   return (
     <>
-      <Typography variant="h3" mt={2}>
-        Elija un servicio para su cita:
-      </Typography>
+      <Typography variant="h3">Elija un servicio para su cita:</Typography>
       <Grid
         container
         my={5}

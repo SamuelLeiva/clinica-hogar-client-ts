@@ -18,9 +18,7 @@ const SelectAppointmentType = () => {
 
   return (
     <>
-      <Typography variant="h3" mt={2}>
-        Elija el tipo de cita:
-      </Typography>
+      <Typography variant="h3">Elija el tipo de cita:</Typography>
       <Grid
         container
         my={5}

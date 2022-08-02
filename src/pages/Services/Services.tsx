@@ -14,7 +14,7 @@ const ServicesPage = () => {
 
   useEffect(() => {
     changePage(0);
-  }, []);
+  }, []); // TODO: que se reinicie el state de la cita
 
   const PageDisplay = () => {
     switch (page) {
@@ -23,11 +23,11 @@ const ServicesPage = () => {
       case 1:
         return <SelectSpeciality></SelectSpeciality>;
       case 2:
-        return <SelectMedic></SelectMedic>;
-      case 3:
-        return <Schedule></Schedule>;
-      case 4:
         return <SelectPatient></SelectPatient>;
+      case 3:
+        return <SelectMedic></SelectMedic>;
+      case 4:
+        return <Schedule></Schedule>;
       case 5:
         return <ConfirmationAndPayment></ConfirmationAndPayment>;
       default:
