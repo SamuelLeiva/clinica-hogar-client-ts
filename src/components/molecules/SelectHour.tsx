@@ -1,9 +1,21 @@
 import { Typography, Stack, Paper, Button } from "@mui/material";
 import { pink } from "@mui/material/colors";
+import { useEffect } from "react";
+import { useAppointmentCreation } from "../../hooks/AppointmentCreation/useAppointmentCreation";
 
-const SelectHour = ({ daySchedule, dateData, setDateData }) => {
-  const selectHour = (hour: any) => {
-    setDateData({ ...dateData, hour });
+const SelectHour = ({ daySchedule, dateData, hour, setHour }) => {
+  const { addAppointmentDate, changePage } = useAppointmentCreation();
+
+  const addDate = (hour: string) => {
+    const date = new Date(
+      dateData.year,
+      dateData.month,
+      dateData.dayNumber,
+      parseInt(hour.substring(0, 2)),
+      parseInt(hour.substring(3))
+    );
+    addAppointmentDate(date);
+    changePage(5);
   };
 
   return (
@@ -32,8 +44,7 @@ const SelectHour = ({ daySchedule, dateData, setDateData }) => {
                   backgroundColor: pink[100],
                 }}
                 onClick={() => {
-                  console.log(elem.hour);
-                  selectHour(elem.hour);
+                  addDate(elem.hour);
                 }}
               >
                 <Typography>{elem.hour}</Typography>

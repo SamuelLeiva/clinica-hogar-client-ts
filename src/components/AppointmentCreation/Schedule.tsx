@@ -17,8 +17,8 @@ const Schedule = () => {
     month: 0,
     dayNumber: 20,
     day: 0,
-    hour: "",
   });
+  const [hour, setHour] = useState("");
 
   //metodo que traiga los horarios del medico
   const fetchMedicSchedule = async () => {
@@ -53,7 +53,8 @@ const Schedule = () => {
         <SelectHour
           daySchedule={daySchedule}
           dateData={dateData}
-          setDateData={setDateData}
+          hour={hour}
+          setHour={setHour}
         ></SelectHour>
       )}
     </>

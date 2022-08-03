@@ -1,10 +1,14 @@
 import { SPECIALITY_URL } from "../../constants/server_uris";
 import axios from "../axios";
 
-const getSpecialities = async () => {
-  const response = await axios.get(SPECIALITY_URL);
-
+const getSpeciality = async (id: string) => {
+  const response = await axios.get(`${SPECIALITY_URL}/${id}`);
   return response;
 };
 
-export { getSpecialities };
+const getSpecialities = async () => {
+  const response = await axios.get(SPECIALITY_URL);
+  return response;
+};
+
+export { getSpecialities, getSpeciality };
