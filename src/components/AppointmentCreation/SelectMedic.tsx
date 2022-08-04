@@ -48,7 +48,7 @@ const SelectMedic = () => {
         {medics &&
           medics.map((medic) => {
             return (
-              <Grid item xs={12} lg={6} width="45%">
+              <Grid key={medic._id} item xs={12} lg={6} width="45%">
                 <Card sx={{ minWidth: 275 }}>
                   <CardContent>
                     <Grid container>

@@ -29,7 +29,9 @@ export const AppointmentProvider = ({ children }: props) => {
     INITIAL_STATE,
     () => {
       const localData = localStorage.getItem("create-appointment-info");
-      return localData ? JSON.parse(localData) : INITIAL_STATE;
+      const parsedData = JSON.parse(localData);
+      parsedData.date = new Date();
+      return localData ? parsedData : INITIAL_STATE;
     }
     //() => {
     //obtener cosas de local data o algo (ver AuthProvider)

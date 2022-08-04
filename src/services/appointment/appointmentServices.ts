@@ -1,7 +1,7 @@
 import { APPOINTMENT_URL } from "../../constants/server_uris";
 import axios from "../axios";
 
-const createAppointment = async (
+const postAppointment = async (
   patientId: string,
   medicId: string,
   date: Date,
@@ -21,4 +21,4 @@ const createAppointment = async (
   return response;
 };
 
-export { createAppointment };
+export { postAppointment };

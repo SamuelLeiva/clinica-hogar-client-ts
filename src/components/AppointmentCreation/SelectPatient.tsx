@@ -1,9 +1,7 @@
 import {
   List,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
-  Divider,
   ListSubheader,
 } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -71,6 +69,7 @@ const SelectPatient = () => {
         patients.map((patient) => (
           <ListItemButton
             sx={{ marginBottom: 2, bgcolor: "beige" }}
+            key={patient._id}
             onClick={() => {
               addPatientData(
                 patient._id,
