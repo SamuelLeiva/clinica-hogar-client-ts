@@ -21,15 +21,16 @@ const Profile = () => {
 
   useEffect(() => {
     let isMounted = true;
-    const controller = new AbortController();
+    const controller = new AbortController(); //to cancel our request if the component unmounts
 
     const getProfile = async () => {
       try {
-        // const response = await axiosPrivate.get(MY_PROFILE_URL, {
-        //   signal: controller.signal,
-        // });
+        const response = await axiosPrivate.get(MY_PROFILE_URL, {
+          signal: controller.signal,
+        });
 
-        const response = await myProfileService(controller);
+        //const response = await myProfileService(controller);
+        console.log("response.data :>> ", response.data);
 
         isMounted &&
           setProfile({
@@ -42,24 +43,23 @@ const Profile = () => {
             phoneNumber: response.data.phoneNumber,
           }); //extraer las propiedades de data y ponerlas en profile
       } catch (err) {
+        console.error(err);
         navigate("/");
       }
     };
 
     getProfile();
 
-    //cleanup function
+    //cleanup function: as the component unmounts
     return () => {
       isMounted = false;
       controller.abort();
     };
-  }, []);
+  }, []); //solo cuando el componente se renderice
 
   return (
     <>
-      <Typography variant="h2" mt={2}>
-        Mi perfil:
-      </Typography>
+      <Typography variant="h2">Mi perfil:</Typography>
       <Grid container my={5} mx="auto" width="70%">
         <Grid item xs={12} md={6} width="45%">
           <Box p={2} mt={5} mb={1} mx={1}>
